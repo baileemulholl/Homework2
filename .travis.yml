@@ -1,6 +1,5 @@
 
 language: cpp
-before_script: cd Homework2
 script:
   - make
   - ./test

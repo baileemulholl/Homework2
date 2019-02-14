@@ -2,17 +2,35 @@ language: cpp
 compiler:
   - gcc
   - clang
+
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode8
+      env:
+        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+
+    - os: osx
+      osx_image: xcode8
+      env:
+        - MATRIX_EVAL="brew install gcc5 && CC=gcc-5 && CXX=g++-5"
+
+    - os: osx
+      osx_image: xcode8
+      env:
+        - MATRIX_EVAL="brew install gcc6 && CC=gcc-6 && CXX=g++-6"
+
+    - os: osx
+      osx_image: xcode8
+      env:
+        - MATRIX_EVAL="brew install gcc && CC=gcc-7 && CXX=g++-7"
+
+before_install:
+    - eval "${MATRIX_EVAL}"
 addons:
   apt:
     sources:
-    - ubuntu-toolchain-r-test
-    - llvm-toolchain-precise-3.8
+      - george-edison55-precise-backports
     packages:
-    - g++-11
-    - clang-3.8
-install:
-- "[ $CXX = g++ ] && export CXX=g++-11 || true"
-- "[ $CXX = clang++ ] && export CXX=clang++-3.8 || true"
-script:
-  - make
-  - make test
+      - cmake-data
+      - cmake

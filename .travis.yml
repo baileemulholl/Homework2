@@ -1,6 +1,6 @@
 
 language: cpp
-before_script: cd utility_functions
+before_script: cd Homework2
 script:
   - make
   - ./test

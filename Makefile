@@ -13,6 +13,8 @@ clean:
 
 #shop: main.cpp Store.o Item.o TextUI.o
 #	$(CXX) $(CXXFLAGS) main.cpp Store.o Item.o TextUI.o -o shop
+test: TextUI.o Store.o Item.o
+	$(CXX) $(CXXFLAGS) test.cpp TextUI.o Store.o Item.o -o test
 
 TextUI.o: TextUI.cpp
 	$(CXX) $(CXXFLAGS) -c TextUI.cpp

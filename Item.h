@@ -20,7 +20,7 @@ public:
 
   int get_quantity() { return quantity_; };
 
-  int get_cost() { return cost_; };
+  double get_cost() { return cost_; };
 
   std::string get_type() { return type_; };
 

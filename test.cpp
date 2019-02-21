@@ -8,7 +8,7 @@ using namespace std;
 ShoppingCart sc;
 Store s("store.txt");
 
-vector<Item *> inventory = s.get_inventory();
+vector<Item *> inventory = s.DisplayInventory();
 
 TEST_CASE("DisplayCart","[shoppingCart]"){
 	SECTION("empty"){		//if cart is empty, show empty display
@@ -40,7 +40,7 @@ TEST_CASE("addItem","[shoppingCart]"){
 		int before = inventory[0]->get_quantity();
 		sc.AddItem(inventory[0]);
 		int after = inventory[0]->get_quantity();
-		REQUIRE(after = before+1);
+		REQUIRE(after == before+1);
 	}
 }
 
@@ -57,7 +57,7 @@ TEST_CASE("removeItem","[shoppingCart]"){
 TEST_CASE("ClearCart","[shoppingCart]"){
 	SECTION("function"){
 		sc.ClearCart();
-		vector(Item *) empty_cart_ = sc.get_items();
+		vector<Item *> empty_cart_ = sc.get_items();
 		REQUIRE(empty_cart_.size()==0);
 	}
 }

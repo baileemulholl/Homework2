@@ -1,4 +1,5 @@
 #define CATCH_CONFIG_MAIN
+#include <string.h>
 #include "catch.hpp"
 #include "Store.h"
 #include "Item.h"
@@ -8,6 +9,7 @@ using namespace std;
 ShoppingCart sc;
 Item item1(0,"item1",5.00, 3);
 Item item2(1,"item2",2.00,5);
+Store s("store.txt");
 
 TEST_CASE("DisplayCart","[shoppingCart]"){
 	SECTION("empty"){		//if cart is empty, show empty display
@@ -61,10 +63,23 @@ TEST_CASE("ClearCart","[shoppingCart]"){
 		vector<Item *> empty_cart_ = sc.get_items();
 		REQUIRE(empty_cart_.size()==0);
 	}
+	SECTION("displayCart after clear"){
+		sc.ClearCart();
+		REQUIRE(sc.DisplayCart()=="");
+	}
 }
 
-// TEST_CASE("checkout","[store]"){
-// 	Store s("")
-// 	SECTION("add to empty")
-// }
+TEST_CASE("checkout","[store]"){
+	SECTION("no total"){
+		double total = s.Checkout();
+		REQUIRE(total == 0.00);
+	}
+	SECTION("cart empty"){
+		string test = s.DisplayCart();
+		REQUIRE(test =="");
+	}
+}
+
+
+
 

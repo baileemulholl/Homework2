@@ -3,7 +3,7 @@ CXXFLAGS	= -std=c++11 -Wall
 
 all: shop
 
-shop: TextUI.o Store.o Item.o  # update to include shop when you have a main.cpp
+shop: TextUI.o Store.o Item.o main.cpp # update to include shop when you have a main.cpp
 	$(CXX) $(CXXFLAGS) main.cpp TextUI.o Store.o Item.o -o shop
 
 clean:
@@ -13,7 +13,7 @@ clean:
 
 #shop: main.cpp Store.o Item.o TextUI.o
 #	$(CXX) $(CXXFLAGS) main.cpp Store.o Item.o TextUI.o -o shop
-test: TextUI.o Store.o Item.o
+test: TextUI.o Store.o Item.o test.cpp
 	$(CXX) $(CXXFLAGS) test.cpp TextUI.o Store.o Item.o -o test
 
 TextUI.o: TextUI.cpp

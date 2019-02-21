@@ -6,9 +6,8 @@
 using namespace std;
 
 ShoppingCart sc;
-Store s("store.txt");
-
-vector<Item *> inventory = s.DisplayInventory();
+Item item1(0,"item1",5.00, 3);
+Item item2(1,"item2",2.00,5);
 
 TEST_CASE("DisplayCart","[shoppingCart]"){
 	SECTION("empty"){		//if cart is empty, show empty display
@@ -16,7 +15,7 @@ TEST_CASE("DisplayCart","[shoppingCart]"){
 		REQUIRE(sc.DisplayCart()=="");
 	}
 	SECTION("addedItem"){		//check to see if added item is correctly displayed
-		sc.AddItem(inventory[0]);
+		sc.AddItem(&item1);
 		string one = sc.DisplayCart();
 		vector<Item *> cart = sc.get_items();
 		string inventory_ = "";
@@ -24,31 +23,38 @@ TEST_CASE("DisplayCart","[shoppingCart]"){
 			inventory_.append(i->ToString());
 			inventory_.append("\n");
 		}
-		REQUIRE(one = inventory_);
+		REQUIRE(one == inventory_);
 	}
 }
 
 TEST_CASE("addItem","[shoppingCart]"){
+	SECTION("add to empty"){
+		vector<Item *> before = sc.get_items();
+		REQUIRE(before.size()==0);
+		sc.AddItem(&item1);
+		before = sc.get_items();
+		REQUIRE(before.size()==1);
+	}
 	SECTION("function"){
 		vector<Item *> before = sc.get_items();
-		sc.AddItem(inventory[1]);
+		sc.AddItem(&item1);
 		vector<Item *> after = sc.get_items();
 		REQUIRE(before != after);
 	}
 
 	SECTION("after add, remove from inventory"){
-		int before = inventory[0]->get_quantity();
-		sc.AddItem(inventory[0]);
-		int after = inventory[0]->get_quantity();
+		int before = item1.get_quantity();
+		sc.AddItem(&item1);
+		int after = item1.get_quantity();
 		REQUIRE(after == before+1);
 	}
 }
 
 TEST_CASE("removeItem","[shoppingCart]"){
 	SECTION("function"){		//item removed
-		sc.AddItem(inventory[0]);
+		sc.AddItem(&item1);
 		vector<Item *> before = sc.get_items();
-		sc.RemoveItem(inventory[0]);
+		sc.RemoveItem(&item1);
 		vector<Item *> after = sc.get_items();
 		REQUIRE(before == after);
 	}

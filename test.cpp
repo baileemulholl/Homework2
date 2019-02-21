@@ -29,17 +29,12 @@ TEST_CASE("DisplayCart","[shoppingCart]"){
 
 TEST_CASE("addItem","[shoppingCart]"){
 	SECTION("add to empty"){
+		sc.ClearCart();
 		vector<Item *> before = sc.get_items();
 		REQUIRE(before.size()==0);
 		sc.AddItem(&item1);
 		before = sc.get_items();
 		REQUIRE(before.size()==1);
-	}
-	SECTION("function"){
-		vector<Item *> before = sc.get_items();
-		sc.AddItem(&item1);
-		vector<Item *> after = sc.get_items();
-		REQUIRE(before != after);
 	}
 
 	SECTION("after add, remove from inventory"){
@@ -67,4 +62,9 @@ TEST_CASE("ClearCart","[shoppingCart]"){
 		REQUIRE(empty_cart_.size()==0);
 	}
 }
+
+// TEST_CASE("checkout","[store]"){
+// 	Store s("")
+// 	SECTION("add to empty")
+// }
 

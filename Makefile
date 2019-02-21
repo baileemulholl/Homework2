@@ -7,7 +7,7 @@ shop: TextUI.o Store.o Item.o main.cpp # update to include shop when you have a 
 	$(CXX) $(CXXFLAGS) main.cpp TextUI.o Store.o Item.o -o shop
 
 clean:
-	rm Store.o Item.o TextUI.o shop
+	rm Store.o Item.o TextUI.o main.cpp test.cpp
 
 # update to include a test target when you have a test.cpp
 
